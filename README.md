@@ -37,3 +37,8 @@ at project root directory, in cmd run:
 
 #Step 5
 Open eclipse and import the project 
+
+# FileSearcher  Requirments
+
+ * Find all files that match a given filter at a given location
+    * Only match files
