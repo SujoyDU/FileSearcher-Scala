@@ -42,3 +42,4 @@ Open eclipse and import the project
 
  * Find all files that match a given filter at a given location
     * Only match files
+    * Use current location if no location is given
