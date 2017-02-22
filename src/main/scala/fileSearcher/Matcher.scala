@@ -6,7 +6,7 @@ import java.io.File
   * Created by sujoy on 2/14/2017.
   */
 class Matcher( filter: String, val rootLocation: String = new File(".")getCanonicalPath(),
-               checkSubFolders: Boolean = false) {
+               checkSubFolders: Boolean = false, contentFilter: Option[String] = None) {
   val rootIOObject = FileConverter.convertToIOObject( new File(rootLocation))
 
 
@@ -33,8 +33,15 @@ class Matcher( filter: String, val rootLocation: String = new File(".")getCanoni
         else FilterChecker(filter) findMatchedFiles directory.children()
       case _ => List()
     }
-    matchedFiles map( iOObject => iOObject.name )
+
+    val contentFilteredFiles = contentFilter match {
+      case Some(dataFilter) => matchedFiles.filter(iOObject =>
+        FilterChecker(dataFilter).matchesFileContent(iOObject.file))
+      case None => matchedFiles
+    }
+    contentFilteredFiles map( iOObject => iOObject.name )
   }
+
 
 
 }
